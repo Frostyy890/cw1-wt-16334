@@ -12,6 +12,6 @@ Your contributions are valuable! Whether it's bug fixes, feature enhancements, o
 Installation:
 To explore or contribute to this project locally:
 
-Access website from here: [repository_link]
+Access website from here: https://frostyy890.github.io/cw1-wt-16334/homepage.html
 Open the index.html file in your preferred browser to view the website.
 Join us in enhancing the online presence of Proweb and making a positive impact in our community!
