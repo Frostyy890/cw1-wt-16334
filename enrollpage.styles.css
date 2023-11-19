@@ -1,0 +1,565 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #fff;     
+    position: relative;
+    text-align: center;
+    min-height: 100vh;
+}
+
+/* Header */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    z-index: 99;
+}
+
+.nav-item {
+    list-style: none;
+}
+
+.nav-item.nav-link {
+    text-decoration: none;
+}
+
+.container {
+    width: 1600px;
+    margin: auto;
+}
+
+.subcontainer {
+    width: 85%;
+    margin: auto;
+}
+
+@media(max-width: 1600px){
+    .container {
+        width: 100%;
+    }
+}
+
+.navbar {
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+
+}
+
+.nav-branding {
+    color: white;
+    font-weight: 900;
+}
+
+.hamburger-menu{
+    display: none;
+    cursor: pointer;
+}
+
+.bar {
+    background-color: white;
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+
+@media(max-width:1024px) {
+    .hamburger-menu{
+        display: block;
+    }
+
+    .hamburger-menu.active-hamburger .bar:nth-child(2){
+        opacity: 0;
+    }
+    .hamburger-menu.active-hamburger .bar:nth-child(1){
+        transform: translateY(8px) rotate(45deg);
+    }
+    .hamburger-menu.active-hamburger .bar:nth-child(3){
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        gap: 0;
+        flex-direction: column;
+        background-color: black;
+        width: 100%;
+        text-align: center;
+        transition: .3s;    
+    }
+
+    .nav-item{
+        margin: 16px 0;
+    }
+
+
+    .nav-menu.active-hamburger {
+        left: 0;
+    }
+}
+
+
+
+.logo {
+    font-size: 2.5em;
+    color: white;    
+}
+
+.navbar a {
+    position: relative;
+    font-size: 1.2em;
+    color: white;
+    margin-left: 30px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.navbar a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 100%;
+    height: 2px;
+    background: white;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .4s;
+}
+
+.navbar a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar .login-btn {
+    width: 120px;
+    height: 30px;
+    background: transparent;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid white;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    margin-left: 30px;
+    transition: .5s;
+}
+
+.navbar .login-btn:hover {
+    background-color: white;
+    /* color: rgb(73, 171, 245); */
+    color: black;
+    font-size: 1.3em;
+}
+
+/* Modal-form */
+
+.modal {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform, .5s ease, height .2s ease;
+}
+
+.wrapper {
+    position: relative;
+    width: 380px;
+    height: 450px;
+    background-color: white;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    box-shadow: 0 0 40px darkslategrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    /* transform: scale(0); */
+    transition: transform, .5s ease, height .2s ease;
+    z-index: 99;
+}
+
+.modal.active-form {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.wrapper .login-form.login {
+    transition: transform .3s ease;
+    transform: translateX(0);
+}
+
+.wrapper.active {
+    height: 500px;
+    z-index: 99;
+
+}
+
+.wrapper.active .login-form.login {
+    transition: none;
+    transform: translateX(-420px);
+}
+
+.wrapper .login-form.registration {
+    position: absolute;
+    transition: none;
+    transform: translateX(420px);
+}
+
+.wrapper.active .login-form.registration {
+    transition: transform .3s ease;
+    transform: translateX(0);
+}
+
+.wrapper .close-form {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 45px;
+        height: 45px;
+        background: black;
+        font-size: 2em;
+        color: white;
+        border-bottom-left-radius: 20px;
+        z-index: 1;
+}
+
+.wrapper .login-form {
+    width: 100%;
+    padding: 35px;
+}
+
+.login-form h2 {
+    font-size: 2em;
+    color: black;
+    text-align: center;
+}
+
+.inputs {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom: 2px solid black;
+    margin: 30px 0;
+}
+
+.inputs label {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    transition: .4s;
+    pointer-events: none;
+}
+
+.inputs input:focus~label, 
+.inputs input:valid~label {
+    top: -5px;
+}
+
+.inputs input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    color: black;
+    font-weight: 500;
+    padding: 0 35px 0 5px;
+}
+
+.inputs .icon {
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: black;
+    line-height: 57px;
+}
+
+.remember-forgot {
+    font-size: 0.9em;
+    color: black;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-forgot label input {
+    margin-right: 3px;
+    accent-color: black;
+}
+
+.remember-forgot a {
+     color: black;
+     text-decoration: none;
+}
+.remember-forgot a:hover {
+    text-decoration: underline;
+}
+
+.btn-submit {
+    width: 100%;
+    height: 45px;
+    background-color: black;
+    font-size: 1em;
+    font-weight: 500;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.register-acc {
+    font-size: 0.9em;
+    color: black;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+}  
+
+.register-acc p a {
+    color: blue;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .4s;
+}
+.register-acc p a:hover {
+    text-decoration: underline;
+}
+
+
+/* Footer */
+
+footer {
+    margin-top: 70px;
+    padding: 8vw;    
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    color: white;
+}
+footer .footer-col{
+    padding-bottom: 50px;
+
+}
+
+footer h3 {
+    color: white;
+    font-weight: bold;
+    font-size: 1.4em;
+    padding-bottom: 25px;
+}
+
+footer li{
+    list-style: none;
+    padding: 10px 0 ;
+    font-size: 1.3em;
+    cursor: pointer;
+    position: relative;
+    
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #23abd4, #23abd4 50%, #fff 50%);
+    background-size: 200% 100%;
+    background-position: -100%;
+    transition: all .3s ease-in-out;
+} 
+
+footer li::before {
+    display: block;
+    content: '';
+    width: 0;
+    height: 3px;
+    bottom: 5px;
+    left: 0;
+    bottom: -3px;
+    z-index: 0;
+    position: absolute;
+    background-color: #23abd4;
+    transition: all .3s ease-in-out;
+}
+
+
+footer li:hover::before{
+    width: 100%;
+}
+
+
+footer li:hover {
+    background-position: 0;
+}
+
+footer h2 {
+    cursor: pointer;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+    background-size: 200% 100%;
+    background-position: -100%;
+    transition: all .6s ease-in-out;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 60px;
+}
+
+footer h2:hover {
+    background-position: 0;
+}
+
+/* Enroll Form */
+
+#enroll {
+    margin-top: 70px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #enroll .container {
+    position: relative;
+    max-width: 1000px;
+    width: 100%;
+    background: black;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  #enroll .container .title {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+  }
+  #enroll .container .form {
+    margin-top: 30px;
+  }
+  .form .input-box {
+    width: 100%;
+    margin-top: 20px;
+  }
+  .input-box label {
+    color: #fff;
+  }
+  .form :where(.input-box input, .select-box) {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #707070;
+    margin-top: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 0 15px;
+  }
+  .input-box input:focus {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  .form .column {
+    display: flex;
+    column-gap: 15px;
+  }
+  .form .gender-box {
+    margin-top: 20px;
+  }
+  .gender-box h3 {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .form :where(.gender-option, .gender) {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    flex-wrap: wrap;
+  }
+  .form .gender {
+    column-gap: 5px;
+  }
+  .gender input {
+    accent-color: rgb(39, 65, 65);
+  }
+  .form :where(.gender input, .gender label) {
+    cursor: pointer;
+  }
+  .gender label {
+    color: #707070;
+  }
+  .address :where(input, .select-box) {
+    margin-top: 15px;
+  }
+  .select-box select {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    color: #707070;
+    font-size: 1rem;
+  }
+  .form button {
+    height: 55px;
+    width: 100%;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background:rgb(39, 65, 65);;
+  }
+  .form button:hover {
+    background: rgb(50, 83, 83);
+  }
+  /*Responsive*/
+  @media screen and (max-width: 500px) {
+    .form .column {
+      flex-wrap: wrap;
+    }
+    .form :where(.gender-option, .gender) {
+      row-gap: 15px;
+    }
+  }
